@@ -47,7 +47,6 @@ def K_M_G(size):
 
 
 if __name__ == '__main__':
-
     path_1 = input("请输入需要查询的文件夹（文件）位置：")
     name = os.listdir(path_1)
     with open(f"{os.path.basename(path_1)}位置的文件大小.txt", 'w') as f:
