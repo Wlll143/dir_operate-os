@@ -1,5 +1,5 @@
 """
-@ User ： 李文杰
+@ User ： Wlll
 ------------------------
 @ Time ： 2022/2/18 1:32
 @ Name ： 查看文件大小.py
@@ -48,13 +48,20 @@ def K_M_G(size):
 
 if __name__ == '__main__':
     path_1 = input("请输入需要查询的文件夹（文件）位置：")
-    name = os.listdir(path_1)
-    with open(f"{os.path.basename(path_1)}位置的文件大小.txt", 'w') as f:
-        for i in name:
-            all_name = os.path.join(path_1, i)
-            if os.path.isfile(all_name) == True:
-                f.writelines(i + '    :          ' + K_M_G(os.path.getsize(all_name)) + '\n')
-                print(i, ":", K_M_G(os.path.getsize(all_name)))
-            else:
-                f.writelines(i + "    :          " + K_M_G(folder_file_size(all_name)) + '\n')
-                print(i, ":", K_M_G(folder_file_size(all_name)))
+    name_list = os.listdir(path_1)
+# with open(f"{os.path.basename(path_1)}位置的文件大小.txt", 'w') as f:
+    dict_size={}
+    for i in name_list:
+        all_name = os.path.join(path_1, i)
+        if os.path.isfile(all_name) == True:
+            # f.writelines(i + '    :          ' + K_M_G(os.path.getsize(all_name)) + '\n')
+            # print(i, ":", K_M_G(os.path.getsize(all_name)))
+            dict_size[i]=int(os.path.getsize(all_name))
+        else:
+            # f.writelines(i + "    :          " + K_M_G(folder_file_size(all_name)) + '\n')
+            # print(i, ":", K_M_G(folder_file_size(all_name)))
+            dict_size[str(i)]=int(folder_file_size(all_name))
+    dict_size=dict(sorted(dict_size.items(),key=lambda item:item[1],reverse=True))
+    for i in dict_size.keys():
+        print(i,":",K_M_G(dict_size[i]))
+
